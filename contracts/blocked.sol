@@ -166,18 +166,18 @@ contract GunBase is GunAccessControl {
     }
 
     //Creates a new Gun Struct.
-    function createGun(string _name, string _serial, string _manufacturer, address _owner) returns (uint) {
+    function createGun(string _name, string _serial, string _manufacturer) returns (uint) {
         Gun memory _newGun = Gun({
             name: _name,
             serial: _serial,
             manufacturer: _manufacturer,
-            owner: _owner
+            owner: msg.sender
         });
 
         uint256 newGunID = gunRecords.push(_newGun) - 1;
         require(newGunID == uint256(uint32(newGunID)));
 
-        _transfer(0, _owner, newGunID);
+        _transfer(0, msg.sender, newGunID);
 
         return newGunID;
     }
@@ -264,12 +264,12 @@ contract GunOwnership is GunBase, ERC721 {
     }
 
     // Transfers a Gun to another address.
-    function transfer(address _to, uint256 _tokenId) {
+    function transfer(address _to, uint256 _tokenId) external {
         // Safety check to prevent against an unexpected 0x0 default.
         require(_to != address(0), "Unexpected address");
         // Disallow transfers to this contract to prevent accidental misuse.
         // The contract should never own any guns.
-        require(_to != address(this, "Invalid address");
+        require(_to != address(this), "Invalid address");
 
         // You can only transfer your own gun.
         require(_owns(msg.sender, _tokenId), "Sender does not own this gun.");
@@ -279,7 +279,7 @@ contract GunOwnership is GunBase, ERC721 {
     }
 
     // Grant another address the right to transfer ownership of a specific Gun.
-    function approve(address _to, uint256 _tokenId) {
+    function approve(address _to, uint256 _tokenId) external {
         // Only an owner can grant transfer approval.
         require(_owns(msg.sender, _tokenId));
 
@@ -379,7 +379,7 @@ contract GunCore is GunOwnership {
         cooAddress = msg.sender;
 
         // start with invalid gun to prevent ownership issues.
-        createGun("", "", "", address(0));
+        createGun("", "", "");
     }
 
     ///  Used to mark the smart contract as upgraded, in case there is a serious
