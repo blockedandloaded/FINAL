@@ -94,7 +94,6 @@ App = {
           gunSelect.append(gunOption);
         });
       }
-
       loader.hide();
       content.show();
     }).catch(function(error) {

@@ -28,26 +28,62 @@
             <p class="text-center">Loading...</p>
           </div>
           <div id="content" style="display: none;">
-            <table class="table">
+<!--             <table class="table">
               <thead>
                 <tr>
                   <th scope="col">Gun ID</th>
                   <th scope="col">Gun Name</th>
-                  <th scope="col">Something</th>
+                  <th scope="col">Manufacturer</th>
                 </tr>
               </thead>
               <tbody id="accountGuns">
+                <tr>
+                      <td>January</td>
+                      <td>$100</td>
+                    </tr>
+                    <tr>
+                      <td>February</td>
+                      <td>$80</td>
+                    </tr>
               </tbody>
+            </table> -->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Gun ID</th>
+                  <th>Gun Name</th>
+                  <th>Manufacturer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>P4F38Q</td>
+                  <td>AR-65</td>
+                  <td>A-Square</td>
+                </tr>
+                <tr>
+                  <td>GJ2409</td>
+                  <td>HandGun</td>
+                  <td>Alliant</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>54DX61</td>
+                  <td>Pistol</td>
+                  <td>Bond Arms</td>
+                </tr>
+              </tfoot>
             </table>
             <hr/>
             <form onSubmit="App.register(); return false;">
               <div class="form-group">
                 <label for="gunRegister">Register</label>
-                <input class="form-control" id="name">
+                <input class="form-control" id="name" placeholder="Gun ID">
                 </input>
-                <input class="form-control" id="serial">
+                <input class="form-control" id="serial" placeholder="Gun Name">
                 </input>
-                <input class="form-control" id="manufacturer">
+                <input class="form-control" id="manufacturer" placeholder="Manufacturer">
                 </input>
               </div>
               <button type="submit" class="btn btn-primary">Register gun!</button>
