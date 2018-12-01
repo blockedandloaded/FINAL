@@ -1,65 +1,132 @@
 App = {
   web3Provider: null,
   contracts: {},
+  account: '0x0',
 
-  init: async function() {
-    // Load pets.
-    $.getJSON('../pets.json', function(data) {
-      var petsRow = $('#petsRow');
-      var petTemplate = $('#petTemplate');
-
-      for (i = 0; i < data.length; i ++) {
-        petTemplate.find('.panel-title').text(data[i].name);
-        petTemplate.find('img').attr('src', data[i].picture);
-        petTemplate.find('.pet-breed').text(data[i].breed);
-        petTemplate.find('.pet-age').text(data[i].age);
-        petTemplate.find('.pet-location').text(data[i].location);
-        petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-
-        petsRow.append(petTemplate.html());
-      }
-    });
-
-    return await App.initWeb3();
+  init: function() {
+    return App.initWeb3();
   },
 
-  initWeb3: async function() {
-    /*
-     * Replace me...
-     */
-
+  initWeb3: function() {
+    if (typeof web3 !== 'undefined') {
+      // If a web3 instance is already provided by Meta Mask.
+      App.web3Provider = web3.currentProvider;
+      web3 = new Web3(web3.currentProvider);
+    } else {
+      // Specify default instance if no web3 instance provided
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+      web3 = new Web3(App.web3Provider);
+    }
     return App.initContract();
   },
 
   initContract: function() {
-    /*
-     * Replace me...
-     */
+    $.getJSON("GunCore.json", function(election) {
+      // Instantiate a new truffle contract from the artifact
+      App.contracts.GunCore = TruffleContract(election);
+      // Connect provider to interact with contract
+      App.contracts.GunCore.setProvider(App.web3Provider);
 
-    return App.bindEvents();
+      App.listenForEvents(); 
+
+      return App.render();
+    });
   },
 
-  bindEvents: function() {
-    $(document).on('click', '.btn-adopt', App.handleAdopt);
+    // Listen for events emitted from the contract
+  listenForEvents: function() {
+    App.contracts.GunCore.deployed().then(function(instance) {
+      // Restart Chrome if you are unable to receive this event
+      // This is a known issue with Metamask
+      // https://github.com/MetaMask/metamask-extension/issues/2393
+      instance.transfer({}, {
+        fromBlock: 0,
+        toBlock: 'latest'
+      }).watch(function(error, event) {
+        console.log("event triggered", event)
+        // Reload when a new transaction is recorded
+        App.render();
+      });
+    });
   },
 
-  markAdopted: function(adopters, account) {
-    /*
-     * Replace me...
-     */
+  render: function() {
+    var transactionInstance;
+    var loader = $("#loader");
+    var content = $("#content");
+
+    loader.show();
+    content.hide();
+
+    // Load account data
+    web3.eth.getCoinbase(function(err, account) {
+      if (err === null) {
+        App.account = account;
+        $("#accountAddress").html("Your Account: " + account);
+      }
+    });
+
+    // Load contract data
+    App.contracts.GunCore.deployed().then(function(instance) {
+      gunInstance = instance;
+      return gunInstance.tokensOfOwner(App.account)
+    }).then(function(gunIDs) { 
+      var accountGuns = $("#accountGuns");
+      accountGuns.empty();
+
+      var gunSelect = $('#gunSelect');
+      gunSelect.empty();
+
+      for (var i = 0; i < gunIDs.length; i++) {
+        gunInstance.gunRecords[gunIDs[i]].then(function(gun) {
+          var name = gun[0];
+          var serial = gun[1];
+          var manufacturer = gun[2];
+
+          // Render candidate Result
+          var gunTemplate = "<tr><th>" + name + "</th><td>" + serial + "</td><td>" + manufacturer + "</td></tr>"
+          accountGuns.append(gunTemplate);
+
+          var gunOption = "<option value='" + serial + "'>" + name + "</ option>"
+          gunSelect.append(gunOption);
+        });
+      }
+
+      loader.hide();
+      content.show();
+    }).catch(function(error) {
+      console.warn(error);
+    });
   },
 
-  handleAdopt: function(event) {
-    event.preventDefault();
-
-    var petId = parseInt($(event.target).data('id'));
-
-    /*
-     * Replace me...
-     */
+  register: function() {
+    var name = $('#name').val();
+    var serial = $('#serial').val();
+    var manufacturer = $('#manufacturer').val();
+    App.contracts.GunCore.deployed().then(function(instance) {
+      return instance.createGun(name, serial, manufacturer, { from: App.account });
+    }).then(function(result) {
+      // Wait for votes to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    })
   }
-
-};
+  };
+//   recordTransaction: function() {
+//     var cId = $('#gunSelect').val();
+//     App.contracts.Election.deployed().then(function(instance) {
+//       return instance.vote(candidateId, { from: App.account });
+//     }).then(function(result) {
+//       // Wait for votes to update
+//       $("#content").hide();
+//       $("#loader").show();
+//     }).catch(function(err) {
+//       console.error(err);
+//     });
+//   }
+// };
 
 $(function() {
   $(window).load(function() {

@@ -2873,14 +2873,14 @@ input, select, textarea {
 			input[type="reset"].primary:hover,
 			input[type="button"].primary:hover,
 			.button.primary:hover {
-				background-color: #209e91;
+				background-color: #e76278;
 			}
 
 			input[type="submit"].primary:active,
 			input[type="reset"].primary:active,
 			input[type="button"].primary:active,
 			.button.primary:active {
-				background-color: #209e91;
+				background-color: #e13652;
 			}
 
 		input[type="submit"].disabled, input[type="submit"]:disabled,
