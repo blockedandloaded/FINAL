@@ -39,7 +39,7 @@ App = {
       // Restart Chrome if you are unable to receive this event
       // This is a known issue with Metamask
       // https://github.com/MetaMask/metamask-extension/issues/2393
-      instance.transfer({}, {
+      instance.Transfer({}, {
         fromBlock: 0,
         toBlock: 'latest'
       }).watch(function(error, event) {
@@ -77,8 +77,11 @@ App = {
       var gunSelect = $('#gunSelect');
       gunSelect.empty();
 
-      for (var i = 0; i < gunIDs.length; i++) {
-        gunInstance.gunRecords[gunIDs[i]].then(function(gun) {
+      var guns = gunInstance.tokensOfOwner(App.account);
+
+      for (var i = 0; i < guns.length; i++) {
+        console.log(getGun(1));
+        gunInstance.getGun(i).then(function(gun) {
           var name = gun[0];
           var serial = gun[1];
           var manufacturer = gun[2];

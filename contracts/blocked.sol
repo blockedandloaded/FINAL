@@ -1,4 +1,5 @@
 pragma solidity ^0.4.23;
+pragma experimental ABIEncoderV2;
 
 contract ERC721 {
     // Required methods
@@ -319,14 +320,14 @@ contract GunOwnership is GunBase, ERC721 {
     }
 
     // Returns a list of all Gun IDs assigned to an address.
-    function tokensOfOwner(address _owner) external view returns(uint256[] ownerTokens) {
-        uint256 tokenCount = balanceOf(_owner);
+    function tokensOfOwner(address _owner) external view returns(uint256, uint256, uint256) {
+        uint256 tokenCount = 3;
 
         if (tokenCount == 0) {
             // Return an empty array
-            return new uint256[](0);
+            return (0, 0, 0);
         } else {
-            uint256[] memory result = new uint256[](tokenCount);
+            uint256[] memory result = new uint256[](3);
             uint256 totalGuns = totalSupply();
             uint256 resultIndex = 0;
 
@@ -341,7 +342,7 @@ contract GunOwnership is GunBase, ERC721 {
                 }
             }
 
-            return result;
+            return (result[0], result[1], result[2]);
         }
     }
 
@@ -410,6 +411,14 @@ contract GunCore is GunOwnership {
         name = _gun.name;
         manufacturer = _gun.manufacturer;
         serialNumber = _gun.serial;
+    }
+
+
+    /// Returns all the relevant information about a specific gun.
+    function getGunRecords()
+        external
+        view
+        returns (Gun[]){ gunRecords;
     }
 
     ///  Override unpause so it requires all external contract addresses
