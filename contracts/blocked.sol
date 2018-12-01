@@ -345,6 +345,32 @@ contract GunOwnership is GunBase, ERC721 {
             return (result[0], result[1], result[2]);
         }
     }
+
+    function gunsOfOwner(address _owner) external view returns(Gun[] ownerGuns) {
+        uint256 tokenCount = balanceOf(_owner);
+
+        if (tokenCount == 0) {
+            // Return an empty array
+            return new uint256[](0);
+        } else {
+            Gun[] memory result = new Gun[](tokenCount);
+            uint256 totalGuns = totalSupply();
+            uint256 resultIndex = 0;
+
+            // We count on the fact that all guns have IDs starting at 1 and increasing
+            // sequentially up to the totalGun count.
+            uint256 gunId;
+
+            for (gunId = 1; gunId <= totalGuns; gunId++) {
+                if (gunIndexToOwner[gunId] == _owner) {
+                    result[resultIndex] = gunRecords[gunId];
+                    resultIndex++;
+                }
+            }
+
+            return result;
+        }
+    }
 }
 
 //Blocked and Loaded main contract.
