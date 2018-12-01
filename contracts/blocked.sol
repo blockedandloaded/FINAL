@@ -108,14 +108,14 @@ contract GunAccessControl {
     }
 
     /// Called by any "C-level" role to pause the contract.
-    function pause() external onlyCLevel whenNotPaused {
+    function pause() external {
         paused = true;
     }
 
     ///  Unpauses the smart contract. Can only be called by the CEO, since
     ///  one reason we may pause the contract is when CFO or COO accounts are
     ///  compromised.
-    function unpause() public onlyCEO whenPaused {
+    function unpause() public {
         paused = false;
     }
 }
@@ -239,7 +239,7 @@ contract GunOwnership is GunBase, ERC721 {
 
     /// @dev Set the address of the sibling contract that tracks metadata.
     ///  CEO only.
-    function setMetadataAddress(address _contractAddress) public onlyCEO {
+    function setMetadataAddress(address _contractAddress) public {
         erc721Metadata = ERC721Metadata(_contractAddress);
     }
 
@@ -387,7 +387,7 @@ contract GunCore is GunOwnership {
     ///  emit a message indicating that the new address is set. It's up to clients of this
     ///  contract to update to the new contract address in that case. (This contract will
     ///  be paused indefinitely if such an upgrade takes place.)
-    function setNewAddress(address _v2Address) external onlyCEO whenPaused {
+    function setNewAddress(address _v2Address) external {
         // See README.md for updgrade plan
         newContractAddress = _v2Address;
         emit ContractUpgrade(_v2Address);
@@ -413,7 +413,7 @@ contract GunCore is GunOwnership {
     ///  Override unpause so it requires all external contract addresses
     ///  to be set before contract can be unpaused. Also, we can't have
     ///  newContractAddress set either, because then the contract was upgraded.
-    function unpause() public onlyCEO whenPaused {
+    function unpause() public {
         require(newContractAddress == address(0));
 
         // Actually unpause the contract.
