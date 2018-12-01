@@ -11,97 +11,125 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<style>
+		.profile-pic {
+/*			position: relative;*/
+			float: left;
+			width: 200px;
+			height: 200px;
+			background-position: 50% 50%;
+			background-repeat: no-repeat;
+			background-size: cover;
+			border-radius: 50%;
+		}
+		</style>
 	</head>
-	<body class="is-preload">
+	<body class="is-preload landing">
 		<div id="page-wrapper">
 
 			<!-- Header -->
 				<header id="header">
-					<h1 id="logo"><a href="index.html">Landed</a></h1>
+					<h1 id="logo"><a href="index.html">blocked + loaded</a></h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="index.html">Change</a></li>
+							<li><a href="index.html">Our Story</a></li>
 							<li>
-								<a href="#">Change</a>
+								<a href="#">Dashboard</a>
 								<ul>
-									<li><a href="left-sidebar.html">ops</a></li>
-									<li><a href="right-sidebar.html">Right Sidebar</a></li>
-									<li><a href="no-sidebar.html">No Sidebar</a></li>
-									<li>
-										<a href="#">Submenu</a>
-										<ul>
-											<li><a href="#">Option 1</a></li>
-											<li><a href="#">Option 2</a></li>
-											<li><a href="#">Option 3</a></li>
-											<li><a href="#">Option 4</a></li>
-										</ul>
-									</li>
+									<li><a href="myguns.html">My Guns</a></li>
 								</ul>
 							</li>
-							<li><a href="elements.html">Change</a></li>
-							<li><a href="#" class="button primary">Make Transaction</a></li>
+							<li><a href="elements.html">Home</a>
+								<ul>
+									<li><a href="left-sidebar.html">About</a></li>
+									<li><a href="Blocked_and_Loaded_White_Paper.pdf">White Paper</a></li>
+									<li><a href="no-sidebar.html">FAQs</a></li>
+									<li><a href="no-sidebar.html">Technical Details</a></li>
+								</ul>
+							</li>
+							<li><a href="registration.html" class="button primary">Make Transfer</a>
+							</li>
 						</ul>
 					</nav>
 				</header>
 
-			<!-- Main -->
-				<div id="main" class="wrapper style1">
+			<!-- Banner -->
+				<section id="banner">
+					<div class="content">
+						<header>
+							<h2>About Blocked and Loaded</h2>
+						</header>
+						<span class="image"><img src="images/cropped-gun.jpg" alt="" /></span>
+					</div>
+					<a href="#one" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- One -->
+				<section id="four" class="wrapper style1 special fade-up">
 					<div class="container">
 						<header class="major">
-							<h2>Left Sidebar</h2>
-							<p>Ipsum dolor feugiat aliquam tempus sed magna lorem consequat accumsan</p>
+							<h2>The Team</h2>
 						</header>
-						<div class="row gtr-150">
-							<div class="col-4 col-12-medium">
-
-								<!-- Sidebar -->
-									<section id="sidebar">
-										<section>
-											<h3>Magna Feugiat</h3>
-											<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit..</p>
-											<footer>
-												<ul class="actions">
-													<li><a href="#" class="button">Learn More</a></li>
-												</ul>
-											</footer>
-										</section>
-										<hr />
-										<section>
-											<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
-											<h3>Amet Lorem Tempus</h3>
-											<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
-											<footer>
-												<ul class="actions">
-													<li><a href="#" class="button">Learn More</a></li>
-												</ul>
-											</footer>
-										</section>
-									</section>
-
+						<div align='center' style='margin-left: 50px' class="box alt">
+							<div class="row gtr-uniform">
+								<div align='center' style='margin-left: 50px'>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<img class = "profile-pic" src = "images/Kimia.png"/>
+									<h3>Kimia Zargari</h3>
+									<p>Computer & Cognitive Science</p>
+									<p>Problem Finder/Solver</p>
+								</section>
+								</div>
+								<div align='center' style='margin-left: 50px'>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<img class = "profile-pic" src = "images/Karina.png"/>
+									<h3>Karina Martinez</h3>
+									<p>Computer Science</p>
+									<p>The Dreamer</p>
+								</section>
+								</div>
+								<div align='center' style='margin-left: 50px'>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<img class = "profile-pic" src = "images/Ashton.png"/>
+									<h3>Ashtom Smith</h3>
+									<p>Environmental Design</p>
+									<p>Peace Maker</p>
+								</section>
+								</div>
 							</div>
-							<div class="col-8 col-12-medium imp-medium">
 
-								<!-- Content -->
-									<section id="content">
-										<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
-										<h3>Dolore Amet Consequat</h3>
-										<p>Aliquam massa urna, imperdiet sit amet mi non, bibendum euismod est. Curabitur mi justo, tincidunt vel eros ullamcorper, porta cursus justo. Cras vel neque eros. Vestibulum diam quam, mollis at magna consectetur non, malesuada quis augue. Morbi tincidunt pretium interdum est. Curabitur mi justo, tincidunt vel eros ullamcorper, porta cursus justo. Cras vel neque eros. Vestibulum diam.</p>
-										<p>Vestibulum diam quam, mollis at consectetur non, malesuada quis augue. Morbi tincidunt pretium interdum. Morbi mattis elementum orci, nec dictum porta cursus justo. Quisque ultricies lorem in ligula condimentum, et egestas turpis sagittis. Cras ac nunc urna. Nullam eget lobortis purus. Phasellus vitae tortor non est placerat tristique.</p>
-										<h3>Sed Magna Ornare</h3>
-										<p>In vestibulum massa quis arcu lobortis tempus. Nam pretium arcu in odio vulputate luctus. Suspendisse euismod lorem eget lacinia fringilla. Sed sed felis justo. Nunc sodales elit in laoreet aliquam. Nam gravida, nisl sit amet iaculis porttitor, risus nisi rutrum metus.</p>
-										<ul>
-											<li>Faucibus orci lobortis ac adipiscing integer.</li>
-											<li>Col accumsan arcu mi aliquet placerat.</li>
-											<li>Lobortis vestibulum ut magna tempor massa nascetur.</li>
-											<li>Blandit massa non blandit tempor interdum.</li>
-											<li>Lacinia mattis arcu nascetur lobortis.</li>
-										</ul>
-									</section>
-
+							<div class="row gtr-uniform">
+								<div align='center' style='margin-left: 50px'>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<img class = "profile-pic" src = "images/Natalie.png"/>
+									<h3>Natalie Enos</h3>
+									<p>Intended Business</p>
+									<p>The Communicator</p>
+								</section>
+							</div>								
+							<div align='center' style='margin-left: 50px'>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<img class = "profile-pic" src = "images/Marielle.png"/>
+									<h3>Marielle Kinney</h3>
+									<p>Economics</p>
+									<p>Executer</p>
+								</section>
+							</div>
+								<div align='center' style='margin-left: 50px'>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<img class = "profile-pic" src = "images/Rebecca.png"/>
+									<h3>Rebecca Bair</h3>
+									<p>Molecular Cell Biology</p>
+									<p>Balloon Popper</p>
+								</section>
+							</div>
 							</div>
 						</div>
+						<footer class="major">
+						</footer>
 					</div>
-				</div>
+				</section>
 
 			<!-- Footer -->
 				<footer id="footer">
