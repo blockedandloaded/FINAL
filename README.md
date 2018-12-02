@@ -2,7 +2,7 @@
     • truffle migrate --reset 
     • npm run dev
     
-This will open the UI in your browser after which you can play around with registering a gun using your ethereum accounts on ganache! 
+This will open the UI in your browser after which you can play around with registering a gun using your ethereum addresses on ganache! 
 
 Pages with this User Experience include: 
 - Dashboard/MyGuns 
