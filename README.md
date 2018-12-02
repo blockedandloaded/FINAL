@@ -1,4 +1,4 @@
-# This file consists of our frontend where we played around with our smart contract and the web3 libraries. To do so you can clone the repository and from your command line run the following commands:
+# This file consists of a simplified version of our frontend where we played around with our smart contract and the web3 libraries. To do so you can clone the repository and from your command line run the following commands:
     • truffle migrate --reset 
     • npm run dev
     
